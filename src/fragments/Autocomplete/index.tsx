@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, memo } from 'react'
 
 import { Results, Input } from '../../components';
-import { DataFilterOptions } from '../../typings';
 import { getFilteredData, getLabel, getValue } from '../../utils';
 
 type Props = {
+  loading: boolean,
   value: string,
   onChange: (value: string) => void,
   options: Record<string, any>[],
@@ -16,6 +16,7 @@ type Props = {
 };
 
 const Autocomplete: React.FC<Props> = ({
+  loading,
   value,
   onChange,
   options = [], 
@@ -24,12 +25,10 @@ const Autocomplete: React.FC<Props> = ({
   disabled = false,
   dataFilter = getFilteredData,
 }) => {
-  const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
 
   const handleChange = useCallback(async (value: string) => {
     onChange(value);
-    setLoading(true);
 
     const matches = await dataFilter({
       value,
@@ -37,9 +36,6 @@ const Autocomplete: React.FC<Props> = ({
       valueExtractor,
     });
 
-    console.log(matches);
-
-    setLoading(false);
     setMatches(matches);
   }, []);
 
@@ -62,4 +58,5 @@ const Autocomplete: React.FC<Props> = ({
   )
 }
 
-export default Autocomplete
+export default memo(Autocomplete);
+

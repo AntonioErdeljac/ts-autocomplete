@@ -7,11 +7,11 @@ type Props = {
 };
 
 const Result: React.FC<Props> = ({ value, highlight, onClick }) => {
-  const generateText = useCallback((value: string) => {
+  const generateText = useCallback(() => {
     const reg = new RegExp(new RegExp(`(${highlight})`, 'gi'));
 
     const parts = value.split(reg);
-    return <span>{Children.toArray(parts.map(part => part.toLowerCase() === highlight.toLowerCase() ? <b>{part}</b> : part))}</span>;
+    return <span>{Children.toArray(parts.map((part) => (part.toLowerCase() === highlight.toLowerCase() ? <b>{part}</b> : part)))}</span>;
   }, [highlight, value]);
 
   const handleResultClick = useCallback(() => {
@@ -20,9 +20,9 @@ const Result: React.FC<Props> = ({ value, highlight, onClick }) => {
 
   return (
     <div onClick={handleResultClick} className="input__results__element">
-      {generateText(value)}
+      {generateText()}
     </div>
   );
-}
+};
 
 export default memo(Result);

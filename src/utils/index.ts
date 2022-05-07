@@ -18,8 +18,10 @@ export const getFilteredData = async ({ value, options, valueExtractor }: DataFi
       if (foundMatch) {
         return foundMatch;
       }
+
+      return null;
     });
   } catch (error) {
     return [];
   }
-}
+};

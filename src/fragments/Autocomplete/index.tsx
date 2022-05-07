@@ -1,4 +1,4 @@
-import React, { useCallback, useState, memo } from 'react'
+import React, { useCallback, useState, memo } from 'react';
 
 import { Results, Input } from '../../components';
 import { getFilteredData, getLabel, getValue } from '../../utils';
@@ -11,7 +11,6 @@ type Props = {
   labelExtractor?: (option: Record<string, any>) => string,
   valueExtractor?: (option: Record<string, any>) => string,
   disabled?: boolean;
-  defaultValue?: '';
   dataFilter?: () => Promise<Record<string, any>[]>,
 };
 
@@ -19,24 +18,24 @@ const Autocomplete: React.FC<Props> = ({
   loading,
   value,
   onChange,
-  options = [], 
-  labelExtractor = getLabel, 
-  valueExtractor = getValue, 
+  options = [],
+  labelExtractor = getLabel,
+  valueExtractor = getValue,
   disabled = false,
   dataFilter = getFilteredData,
 }) => {
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
 
-  const handleChange = useCallback(async (value: string) => {
-    onChange(value);
+  const handleChange = useCallback(async (newValue: string) => {
+    onChange(newValue);
 
-    const matches = await dataFilter({
-      value,
+    const newMatches = await dataFilter({
+      value: newValue,
       options,
       valueExtractor,
     });
 
-    setMatches(matches);
+    setMatches(newMatches);
   }, []);
 
   const handleItemClick = useCallback((id: string) => {
@@ -47,16 +46,15 @@ const Autocomplete: React.FC<Props> = ({
   return (
     <div className="input">
       <Input loading={loading} disabled={disabled} value={value} onChange={handleChange} />
-      <Results 
-        labelExtractor={labelExtractor} 
-        valueExtractor={valueExtractor} 
-        options={matches} 
-        value={value} 
-        onItemClick={handleItemClick} 
+      <Results
+        labelExtractor={labelExtractor}
+        valueExtractor={valueExtractor}
+        options={matches}
+        value={value}
+        onItemClick={handleItemClick}
       />
     </div>
-  )
-}
+  );
+};
 
 export default memo(Autocomplete);
-

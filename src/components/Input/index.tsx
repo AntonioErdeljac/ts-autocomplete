@@ -7,22 +7,24 @@ type Props = {
   loading: boolean,
 };
 
-const Input: React.FC<Props> = ({ onChange, value, disabled, loading }) => {
+const Input: React.FC<Props> = ({
+  onChange, value, disabled, loading,
+}) => {
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    onChange(event.target.value)
+    onChange(event.target.value);
   }, [onChange]);
 
   return (
     <input
       disabled={disabled}
       value={value}
-      className={`input__search ${disabled ? 'input__search--disabled' : ''} ${loading ? 'input__search--loading' : ''}`} 
-      onChange={handleChange} 
-      placeholder="Autocomplete" 
+      className={`input__search ${disabled ? 'input__search--disabled' : ''} ${loading ? 'input__search--loading' : ''}`}
+      onChange={handleChange}
+      placeholder="Autocomplete"
     />
   );
-}
+};
 
 export default memo(Input);

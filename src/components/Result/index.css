@@ -1,0 +1,10 @@
+.input__results__element {
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.1s all;
+  font-size: 16px;
+}
+
+.input__results__element:hover {
+  background-color: rgb(245, 245, 245);
+}

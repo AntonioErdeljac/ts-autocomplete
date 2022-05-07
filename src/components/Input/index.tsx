@@ -1,4 +1,5 @@
 import React, { memo, useCallback, ChangeEvent } from 'react';
+import './index.css';
 
 type Props = {
   onChange: (value: string) => void,

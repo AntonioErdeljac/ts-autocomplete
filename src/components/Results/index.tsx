@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import './index.css';
 
 import Result from '../Result';
 

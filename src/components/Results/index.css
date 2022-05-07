@@ -1,0 +1,11 @@
+.input__results__wrapper {
+  border-top-style: none;
+  border-radius: 4px;
+  border-color: lightgray;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.input__results__wrapper--disabled {
+  display: none;
+}

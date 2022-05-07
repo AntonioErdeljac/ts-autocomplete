@@ -1,4 +1,5 @@
 import React, { memo, useCallback, Children } from 'react';
+import './index.css';
 
 type Props = {
   value: string,

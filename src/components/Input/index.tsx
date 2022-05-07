@@ -14,11 +14,11 @@ const Input: React.FC<Props> = ({ onChange, value }) => {
 
   return (
     <input 
-        value={value}
-        className="input__search" 
-        onChange={handleChange} 
-        placeholder="Autocomplete" 
-      />
+      value={value}
+      className="input__search" 
+      onChange={handleChange} 
+      placeholder="Autocomplete" 
+    />
   );
 }
 

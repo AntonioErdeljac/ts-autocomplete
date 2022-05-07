@@ -9,6 +9,7 @@ type Props = {
   onItemClick: (id: string) => void,
   labelExtractor: (option: Record<string, any>) => string,
   valueExtractor: (option: Record<string, any>) => string,
+  selectIndex: number,
 };
 
 const Results: React.FC<Props> = ({
@@ -17,9 +18,18 @@ const Results: React.FC<Props> = ({
   onItemClick,
   valueExtractor,
   labelExtractor,
+  selectIndex,
 }) => (
   <div className={`input__results__wrapper ${options.length === 0 ? 'input__results__wrapper--disabled' : ''}`}>
-    {options.map((item) => <Result key={valueExtractor(item)} onClick={(id: string) => onItemClick(id)} value={labelExtractor(item)} highlight={value} />)}
+    {options.map((item, index) => (
+      <Result
+        selected={index === selectIndex}
+        key={valueExtractor(item)}
+        onClick={(id: string) => onItemClick(id)}
+        value={labelExtractor(item)}
+        highlight={value}
+      />
+    ))}
   </div>
 );
 

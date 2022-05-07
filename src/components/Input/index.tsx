@@ -1,4 +1,6 @@
-import React, { memo, useCallback, ChangeEvent } from 'react';
+import React, {
+  memo, useCallback, ChangeEvent, KeyboardEventHandler, KeyboardEvent,
+} from 'react';
 import './index.css';
 
 type Props = {
@@ -6,10 +8,15 @@ type Props = {
   value: string,
   disabled: boolean,
   loading: boolean,
+  onKeyDown: KeyboardEventHandler<HTMLInputElement>,
 };
 
 const Input: React.FC<Props> = ({
-  onChange, value, disabled, loading,
+  onChange,
+  onKeyDown,
+  value,
+  disabled,
+  loading,
 }) => {
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -17,8 +24,13 @@ const Input: React.FC<Props> = ({
     onChange(event.target.value);
   }, [onChange]);
 
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
+    onKeyDown(event);
+  }, [onKeyDown]);
+
   return (
     <input
+      onKeyDown={handleKeyDown}
       disabled={disabled}
       value={value}
       className={`input__search ${disabled ? 'input__search--disabled' : ''} ${loading ? 'input__search--loading' : ''}`}

@@ -1,7 +1,22 @@
-import React, { useCallback, useState, memo } from 'react';
+import React, {
+  useCallback,
+  useState,
+  memo,
+  KeyboardEvent,
+} from 'react';
 
 import { Results, Input } from '../../components';
 import { getFilteredData, getLabel, getValue } from '../../utils';
+
+/**
+ * Eslint no shadow bug (See: https://stackoverflow.com/questions/63961803/eslint-says-all-enums-in-typescript-app-are-already-declared-in-the-upper-scope)
+ */
+// eslint-disable-next-line no-shadow
+enum KEY_MAP {
+  ENTER = 13,
+  UP = 40,
+  DOWN = 38
+}
 
 type Props = {
   loading: boolean,
@@ -25,6 +40,7 @@ const Autocomplete: React.FC<Props> = ({
   dataFilter = getFilteredData,
 }) => {
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
+  const [selectIndex, setSelectIndex] = useState(0);
 
   const handleChange = useCallback(async (newValue: string) => {
     onChange(newValue);
@@ -43,10 +59,21 @@ const Autocomplete: React.FC<Props> = ({
     setMatches([]);
   }, []);
 
+  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === KEY_MAP.DOWN && selectIndex > 0) {
+      setSelectIndex((currentSelectIndex) => currentSelectIndex - 1);
+    } else if (event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1) {
+      setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
+    } else if (event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0) {
+      handleItemClick(labelExtractor(matches[selectIndex]));
+    }
+  }, [selectIndex, matches]);
+
   return (
     <div className="input">
-      <Input loading={loading} disabled={disabled} value={value} onChange={handleChange} />
+      <Input onKeyDown={handleKeyDown} loading={loading} disabled={disabled} value={value} onChange={handleChange} />
       <Results
+        selectIndex={selectIndex}
         labelExtractor={labelExtractor}
         valueExtractor={valueExtractor}
         options={matches}

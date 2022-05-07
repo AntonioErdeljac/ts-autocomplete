@@ -5,9 +5,12 @@ type Props = {
   value: string,
   highlight: string,
   onClick: (id: string) => void;
+  selected: boolean
 };
 
-const Result: React.FC<Props> = ({ value, highlight, onClick }) => {
+const Result: React.FC<Props> = ({
+  value, highlight, onClick, selected,
+}) => {
   const generateText = useCallback(() => {
     const reg = new RegExp(new RegExp(`(${highlight})`, 'gi'));
 
@@ -20,7 +23,7 @@ const Result: React.FC<Props> = ({ value, highlight, onClick }) => {
   }, [value, onClick]);
 
   return (
-    <div onClick={handleResultClick} className="input__results__element">
+    <div onClick={handleResultClick} className={`input__results__element ${selected ? 'input__results__element--selected' : ''}`}>
       {generateText()}
     </div>
   );

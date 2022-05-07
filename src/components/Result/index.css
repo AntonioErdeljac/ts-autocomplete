@@ -8,3 +8,7 @@
 .input__results__element:hover {
   background-color: rgb(245, 245, 245);
 }
+
+.input__results__element--selected {
+  background-color: rgb(245, 245, 245);
+}

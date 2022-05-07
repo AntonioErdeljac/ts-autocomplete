@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
 import { Autocomplete } from './fragments';
-import data from './data.json';
 import { getLabel, getValue } from './utils';
+import data from './data.json';
 
 /**
  * Modify the line below to an API that returns Record<string, any>[] type of data, default TS text matching function using regex.

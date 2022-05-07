@@ -29,6 +29,10 @@ code {
   font-size: 16px;
 }
 
+.input__search--disabled {
+  opacity: 0.5;
+}
+
 .input__results__wrapper {
   border-top-style: none;
   border-radius: 4px;

@@ -2,12 +2,6 @@
 
 Autocomplete component built using React + Typescript. No external libraries.
 
-### CI / CD
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d4f2024b-4fba-430c-aa3a-d6b413c9899a/deploy-status)](https://app.netlify.com/sites/nimble-treacle-013c0b/deploys)
-
-[Live version](https://nimble-treacle-013c0b.netlify.app/)
-
 ### Lint
 
 [![eslint: airbnb](https://img.shields.io/badge/Eslint-Airbnb-red?logo=airbnb&style=flat)](https://github.com/airbnb/javascript)

@@ -1,0 +1,18 @@
+[
+  {
+    "value": "lorem",
+    "label": "Lorem"
+  },
+  {
+    "value": "loremius",
+    "label": "Loremius"
+  },
+  {
+    "value": "ipsum",
+    "label": "Ipsum"
+  },
+  {
+    "value": "ipsumius",
+    "label": "Ipsumius"
+  }
+]

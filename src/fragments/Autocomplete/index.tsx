@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react'
 
-import { Results, Input } from './components';
-import { DataFilterOptions } from './typings';
-import { getFilteredData, getLabel, getValue } from './utils';
+import { Results, Input } from '../../components';
+import { DataFilterOptions } from '../../typings';
+import { getFilteredData, getLabel, getValue } from '../../utils';
 
 const results = [{ value: 'test', label: 'Test' }, { value: 'testing', label: 'Testing' }, { value: 'testable', label: 'Testable' }, { value: 'testv', label: 'Testv'}];
 
@@ -15,7 +15,7 @@ type Props = {
   dataFilter?: (options: DataFilterOptions) => Record<string, any>[],
 };
 
-const App: React.FC<Props> = ({ 
+const Autocomplete: React.FC<Props> = ({ 
   options = results, 
   labelExtractor = getLabel, 
   valueExtractor = getValue, 
@@ -60,4 +60,4 @@ const App: React.FC<Props> = ({
   )
 }
 
-export default App
+export default Autocomplete

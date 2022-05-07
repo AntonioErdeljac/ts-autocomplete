@@ -10,6 +10,7 @@ Features:
 - Click on result and close results
 - Use keyboard arrows to navigate results
 - Custom label & value extractors to fit any kind of data object
+- Custom data filters, pass any fetch / axios method to receive data
 - BEM type of CSS classes
 - Components & Fragments folder structure
 - ESlint enforced style

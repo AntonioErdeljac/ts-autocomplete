@@ -4,9 +4,10 @@ type Props = {
   onChange: (value: string) => void,
   value: string,
   disabled: boolean,
+  loading: boolean,
 };
 
-const Input: React.FC<Props> = ({ onChange, value, disabled }) => {
+const Input: React.FC<Props> = ({ onChange, value, disabled, loading }) => {
   const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
@@ -17,7 +18,7 @@ const Input: React.FC<Props> = ({ onChange, value, disabled }) => {
     <input
       disabled={disabled}
       value={value}
-      className={`input__search ${disabled ? 'input__search--disabled' : ''}`} 
+      className={`input__search ${disabled ? 'input__search--disabled' : ''} ${loading ? 'input__search--loading' : ''}`} 
       onChange={handleChange} 
       placeholder="Autocomplete" 
     />

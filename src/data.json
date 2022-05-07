@@ -1,18 +1,22 @@
 [
   {
-    "value": "lorem",
-    "label": "Lorem"
+    "value": "antonio",
+    "label": "Antonio"
   },
   {
-    "value": "loremius",
-    "label": "Loremius"
+    "value": "antun",
+    "label": "Antun"
   },
   {
-    "value": "ipsum",
-    "label": "Ipsum"
+    "value": "toni",
+    "label": "Toni"
   },
   {
-    "value": "ipsumius",
-    "label": "Ipsumius"
+    "value": "tonino",
+    "label": "Tonino"
+  },
+  {
+    "value": "tony",
+    "label": "Tony"
   }
 ]

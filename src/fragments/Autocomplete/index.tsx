@@ -66,6 +66,7 @@ const Autocomplete: React.FC<Props> = ({
       setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
     } else if (event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0) {
       handleItemClick(labelExtractor(matches[selectIndex]));
+      setSelectIndex(0);
     }
   }, [selectIndex, matches]);
 

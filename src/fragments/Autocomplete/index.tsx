@@ -4,31 +4,31 @@ import { Results, Input } from '../../components';
 import { DataFilterOptions } from '../../typings';
 import { getFilteredData, getLabel, getValue } from '../../utils';
 
-const results = [{ value: 'test', label: 'Test' }, { value: 'testing', label: 'Testing' }, { value: 'testable', label: 'Testable' }, { value: 'testv', label: 'Testv'}];
-
 type Props = {
+  value: string,
+  onChange: (value: string) => void,
   options: Record<string, any>[],
   labelExtractor?: (option: Record<string, any>) => string,
   valueExtractor?: (option: Record<string, any>) => string,
   disabled?: boolean;
   defaultValue?: '';
-  dataFilter?: (options: DataFilterOptions) => Record<string, any>[],
+  dataFilter?: () => Promise<Record<string, any>[]>,
 };
 
-const Autocomplete: React.FC<Props> = ({ 
-  options = results, 
+const Autocomplete: React.FC<Props> = ({
+  value,
+  onChange,
+  options = [], 
   labelExtractor = getLabel, 
   valueExtractor = getValue, 
   disabled = false,
-  defaultValue = '',
   dataFilter = getFilteredData,
 }) => {
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState<string>(defaultValue);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
 
   const handleChange = useCallback(async (value: string) => {
-    setValue(value);
+    onChange(value);
     setLoading(true);
 
     const matches = await dataFilter({
@@ -37,12 +37,14 @@ const Autocomplete: React.FC<Props> = ({
       valueExtractor,
     });
 
+    console.log(matches);
+
     setLoading(false);
     setMatches(matches);
   }, []);
 
   const handleItemClick = useCallback((id: string) => {
-    setValue(id);
+    onChange(id);
     setMatches([]);
   }, []);
 

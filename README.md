@@ -50,18 +50,24 @@ git clone https://github.com/AntonioErdeljac/ts-autocomplete.git
 npm i
 ```
 
+### Start the app
+
+```shell
+npm start
+```
+
 ## Available commands
 
 Running commands with npm `npm run [command]`
 
-| command         | description                                                    |
-| :-------------- | :------------------------------------------------------------- |
-| `start`         | Starts a development instance of app on http://localhost:3000/ |
-| `build`         | Creates a production bundle                                    |
-| `preview`       | Starts Vite preview server                                     |
-| `test`          | Runs tests                                                     |
-| `test:watch`    | Runs tests in watch / update mode                              |
-| `test:coverage` | Runs tests in coverage mode                                    |
+| command         | description                              |
+| :-------------- | :--------------------------------------- |
+| `start`         | Starts a development instance of the app |
+| `build`         | Creates a production bundle              |
+| `preview`       | Preview build bundle                     |
+| `test`          | Runs tests                               |
+| `test:watch`    | Runs tests in watch / update mode        |
+| `test:coverage` | Runs tests in coverage mode              |
 
 ## Available props
 

@@ -43,7 +43,7 @@ const Autocomplete: React.FC<Props> = ({
     const newMatches = await dataFilter({
       value: newValue,
       options,
-      valueExtractor,
+      labelExtractor,
     });
 
     setMatches(newMatches);

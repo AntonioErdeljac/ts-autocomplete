@@ -7,7 +7,7 @@ export const getValue = (option: Record<string, any>) => option.value;
 export const getFilteredData = async ({
   value,
   options,
-  valueExtractor,
+  labelExtractor,
 }: DataFilterOptions): Promise<Record<string, any>[]> => {
   try {
     const reg = new RegExp(value.toLowerCase());
@@ -17,7 +17,7 @@ export const getFilteredData = async ({
     }
 
     return options.filter((result) => {
-      const resultValue = valueExtractor(result).toLowerCase();
+      const resultValue = labelExtractor(result).toLowerCase();
       const foundMatch = resultValue.match(reg);
 
       if (foundMatch) {

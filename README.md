@@ -18,10 +18,14 @@ Features:
 - Strictly Typed
 - Unit tests with React Testing Library
 - Husky pre-push & pre-commit hooks
+- Github Actions CI / CD
+- Netfliy CI / CD
 
 ### CI / CD
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/110ec474-2f3c-4785-9ff8-156c29d5dfa2/deploy-status)](https://app.netlify.com/sites/splendorous-baklava-4774d0/deploys)
+
+[![Node.js CI](https://github.com/AntonioErdeljac/ts-autocomplete/actions/workflows/node.js.yml/badge.svg)](https://github.com/AntonioErdeljac/ts-autocomplete/actions/workflows/node.js.yml)
 
 [Live version](https://splendorous-baklava-4774d0.netlify.app/)
 

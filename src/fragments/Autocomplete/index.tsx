@@ -1,4 +1,4 @@
-import React, { useCallback, useState, memo, KeyboardEvent } from 'react';
+import React, { useCallback, useState, memo, KeyboardEvent, useEffect } from 'react';
 
 import './index.css';
 
@@ -16,14 +16,14 @@ enum KEY_MAP {
 }
 
 type Props = {
-  loading: boolean;
+  loading?: boolean;
   value: string;
   onChange: (value: string) => void;
   options: Record<string, any>[];
   labelExtractor?: (option: Record<string, any>) => string;
   valueExtractor?: (option: Record<string, any>) => string;
   disabled?: boolean;
-  dataFilter?: () => Promise<Record<string, any>[]>;
+  getData?: (value: string) => Promise<Record<string, any>[]>;
   placeholder?: string;
 };
 
@@ -35,31 +35,37 @@ const Autocomplete: React.FC<Props> = ({
   labelExtractor = getLabel,
   valueExtractor = getValue,
   disabled = false,
-  dataFilter = getFilteredData,
+  getData = getFilteredData,
   placeholder,
 }) => {
+  const [_loading, setLoading] = useState(!!loading);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
   const [selectIndex, setSelectIndex] = useState(0);
 
-  const handleChange = useCallback(async (newValue: string) => {
-    onChange(newValue);
+  useEffect(() => {
+    setLoading(!!loading);
+  }, [loading]);
 
-    if (newValue === '') {
-      setSelectIndex(0);
-    }
+  const handleChange = useCallback(
+    async (newValue: string) => {
+      onChange(newValue);
 
-    const newMatches = await dataFilter({
-      value: newValue,
-      options,
-      labelExtractor,
-    });
+      if (newValue === '') {
+        setSelectIndex(0);
+      }
 
-    if (selectIndex > newMatches.length - 1) {
-      setSelectIndex(newMatches.length - 1);
-    }
+      setLoading(true);
+      const newMatches = await getData(newValue, options, labelExtractor);
+      setLoading(false);
 
-    setMatches(newMatches);
-  }, []);
+      if (selectIndex > newMatches.length - 1) {
+        setSelectIndex(newMatches.length - 1);
+      }
+
+      setMatches(newMatches);
+    },
+    [options, labelExtractor],
+  );
 
   const handleItemClick = useCallback((id: string) => {
     onChange(id);
@@ -89,7 +95,7 @@ const Autocomplete: React.FC<Props> = ({
     <div className="input">
       <Input
         onKeyDown={handleKeyDown}
-        loading={loading}
+        loading={_loading}
         disabled={disabled}
         value={value}
         onChange={handleChange}

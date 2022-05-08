@@ -23,26 +23,18 @@ const getRemoteData = (value: string): Promise<Record<string, any>[]> =>
 
 const App = () => {
   const [value, setValue] = useState('');
-  const [loading, setLoading] = useState(false);
+
+  const handleRemoteData = useCallback(async (text: string) => getRemoteData(text), []);
 
   const handleChange = useCallback((text: string) => {
     setValue(text);
   }, []);
 
-  const handleRemoteData = useCallback(async () => {
-    setLoading(true);
-    const remoteData = await getRemoteData(value);
-    setLoading(false);
-
-    return remoteData;
-  }, [value]);
-
   return (
     <Autocomplete
-      loading={loading}
       value={value}
       onChange={handleChange}
-      dataFilter={MOCK_API_URL ? handleRemoteData : undefined}
+      getData={MOCK_API_URL ? handleRemoteData : undefined}
       valueExtractor={getValue}
       labelExtractor={getLabel}
       options={mockData}

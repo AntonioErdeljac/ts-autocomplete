@@ -1,5 +1,3 @@
-import { DataFilterOptions } from '../typings';
-
 export const getLabel = (option: Record<string, any>) => option.label;
 
 export const getValue = (option: Record<string, any>) => option.value;
@@ -7,11 +5,11 @@ export const getValue = (option: Record<string, any>) => option.value;
 /**
  * This can be a Server function returning matching objects
  */
-export const getFilteredData = async ({
-  value,
-  options,
-  labelExtractor,
-}: DataFilterOptions): Promise<Record<string, any>[]> => {
+export const getFilteredData = async (
+  value: string,
+  options: Record<string, any>,
+  labelExtractor: (labelValue: Record<string, any>) => string,
+): Promise<Record<string, any>[]> => {
   try {
     const reg = new RegExp(value.toLowerCase());
 
@@ -19,7 +17,7 @@ export const getFilteredData = async ({
       return [];
     }
 
-    return options.filter((result) => {
+    return options.filter((result: Record<string, any>) => {
       const resultValue = labelExtractor(result).toLowerCase();
       const foundMatch = resultValue.match(reg);
 

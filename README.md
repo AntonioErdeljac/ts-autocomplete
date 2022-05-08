@@ -54,3 +54,4 @@ Available props for the component
 | `valueExtractor` | Function to recognize "value / id" from given options data, Default (option) => option.value                                            |
 | `labelExtractor` | Function to recognize "label" from given options data, Default (option) => option.label                                                 |
 | `options`        | Data to render / filter                                                                                                                 |
+| `placeholder`    | Input placeholder                                                                                                                       |

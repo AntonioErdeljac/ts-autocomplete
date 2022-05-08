@@ -2,6 +2,9 @@ import React, { memo, useCallback, ChangeEvent, KeyboardEventHandler, KeyboardEv
 
 import './index.css';
 
+import CloseIcon from '../CloseIcon';
+import LoadingIcon from '../LoadingIcon';
+
 import { classNames } from '../../utils';
 
 type Props = {
@@ -29,19 +32,38 @@ const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading 
     [onKeyDown],
   );
 
+  const handleClear = useCallback(() => {
+    onChange('');
+  }, [onChange]);
+
   return (
-    <input
-      onKeyDown={handleKeyDown}
-      disabled={disabled}
-      value={value}
-      className={classNames({
-        input__search: true,
-        'input__search--disabled': disabled,
-        'input__search--loading': loading,
-      })}
-      onChange={handleChange}
-      placeholder="Autocomplete"
-    />
+    <div className="input__search__wrapper">
+      <input
+        onKeyDown={handleKeyDown}
+        disabled={disabled}
+        value={value}
+        className={classNames({
+          input__search: true,
+          'input__search--disabled': disabled,
+          'input__search--loading': loading,
+        })}
+        onChange={handleChange}
+        placeholder="Autocomplete"
+      />
+      {loading ? (
+        <div className="input__search__action">
+          <LoadingIcon />
+        </div>
+      ) : null}
+      {value && !loading ? (
+        <div
+          onClick={handleClear}
+          className="input__search__action input__search__action--clickable"
+        >
+          <CloseIcon />
+        </div>
+      ) : null}
+    </div>
   );
 };
 

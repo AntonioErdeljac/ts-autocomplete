@@ -56,11 +56,16 @@ const Autocomplete: React.FC<Props> = ({
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.keyCode === KEY_MAP.DOWN && selectIndex > 0) {
+      const shouldGoDown = event.keyCode === KEY_MAP.DOWN && selectIndex > 0;
+      const shouldGoUp = event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1;
+      const shouldSelect =
+        event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0;
+
+      if (shouldGoDown) {
         setSelectIndex((currentSelectIndex) => currentSelectIndex - 1);
-      } else if (event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1) {
+      } else if (shouldGoUp) {
         setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
-      } else if (event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0) {
+      } else if (shouldSelect) {
         handleItemClick(labelExtractor(matches[selectIndex]));
         setSelectIndex(0);
       }

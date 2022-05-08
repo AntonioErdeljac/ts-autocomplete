@@ -16,9 +16,16 @@ Features:
 - ESlint enforced style
 - Strictly Typed
 
+### CI / CD
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/110ec474-2f3c-4785-9ff8-156c29d5dfa2/deploy-status)](https://app.netlify.com/sites/splendorous-baklava-4774d0/deploys)
+
+[Live version](https://splendorous-baklava-4774d0.netlify.app/)
+
 ### Lint
 
 [![eslint: airbnb](https://img.shields.io/badge/Eslint-Airbnb-red?logo=airbnb&style=flat)](https://github.com/airbnb/javascript)
+[![code style: prettier](https://img.shields.io/badge/Code%20Style-Prettier-red?logo=prettier&style=flat)](https://github.com/prettier/prettier)
 
 ### Cloning the repository
 

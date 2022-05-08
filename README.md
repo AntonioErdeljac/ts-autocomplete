@@ -1,6 +1,6 @@
 # ts-autocomplete
 
-Autocomplete component built using React + Typescript. No external libraries.
+Autocomplete component built using React + Typescript. No external libraries for development, testing is done using React Testing Library, Bundling using Vite.
 
 Features:
 

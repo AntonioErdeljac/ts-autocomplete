@@ -13,7 +13,7 @@
 
 3. Describe 3 ways to pass information from a component to its PARENT.
 
-   > 1. Create a method in parent component which accepts an argument that will be used in the parent component, pass the given method to a child component, invoke the method inside a child component and pass the appropriate value inside. For example in my Autocomplete's <Results /> I pass `onClick` to <Result /> which is invoked inside the child (Result) and passed the ID inside the method which is then read by the parent (Results)
+   > 1. Create a method in parent component which accepts an argument that will be used in the parent component, pass the given method to a child component, invoke the method inside a child component and pass the appropriate value inside. For example in my Autocomplete's `<Results />` I pass `onClick` to `<Result />` which is invoked inside the child (Result) and passed the ID inside the method which is then read by the parent (Results)
    > 2. Create a global store which is equally accessible by both parent and the child. Dispatch the change in the child component with the respective value, register change in the Parent component and receive the change effectively made by the Child component. (Redux, Context, Mobx...)
    > 3. Child and parent could have a different form of direct communication from Global state, such as WebRTC or WebSockets.
 

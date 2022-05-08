@@ -74,7 +74,7 @@ const Autocomplete: React.FC<Props> = ({
 
       setMatches(newMatches);
     },
-    [options, labelExtractor],
+    [options, labelExtractor, getData, onChange, selectIndex],
   );
 
   const handleItemClick = useCallback(
@@ -86,7 +86,7 @@ const Autocomplete: React.FC<Props> = ({
       onChange(id);
       setMatches([]);
     },
-    [onItemClick],
+    [onItemClick, onChange],
   );
 
   const handleKeyDown = useCallback(
@@ -106,7 +106,7 @@ const Autocomplete: React.FC<Props> = ({
         setSelectIndex(0);
       }
     },
-    [selectIndex, matches],
+    [selectIndex, matches, handleItemClick, labelExtractor],
   );
 
   const handleFocus = useCallback(

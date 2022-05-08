@@ -36,11 +36,11 @@ npm i
 
 Running commands with npm `npm run [command]`
 
-| command   | description                          |
-| :-------- | :----------------------------------- |
-| `start`   | Starts a development instance of app |
-| `build`   | Creates a production bundle          |
-| `preview` | Starts Vite preview server           |
+| command   | description                                                    |
+| :-------- | :------------------------------------------------------------- |
+| `start`   | Starts a development instance of app on http://localhost:3000/ |
+| `build`   | Creates a production bundle                                    |
+| `preview` | Starts Vite preview server                                     |
 
 ## Autocomplete props
 

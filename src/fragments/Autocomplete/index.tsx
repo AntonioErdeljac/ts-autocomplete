@@ -15,7 +15,7 @@ enum KEY_MAP {
   DOWN = 38,
 }
 
-const MAX_RESULTS_HEIGHT = 300;
+const MAX_RESULTS_HEIGHT = 500;
 
 type Props = {
   loading?: boolean;
@@ -30,6 +30,7 @@ type Props = {
   maxResultsHeight?: number;
   onFocus?: (event: FocusEvent) => void;
   onBlur?: (event: FocusEvent) => void;
+  onItemClick?: (id: string) => void;
 };
 
 const Autocomplete: React.FC<Props> = ({
@@ -45,6 +46,7 @@ const Autocomplete: React.FC<Props> = ({
   maxResultsHeight = MAX_RESULTS_HEIGHT,
   onFocus,
   onBlur,
+  onItemClick,
 }) => {
   const [_loading, setLoading] = useState(!!loading);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
@@ -75,10 +77,17 @@ const Autocomplete: React.FC<Props> = ({
     [options, labelExtractor],
   );
 
-  const handleItemClick = useCallback((id: string) => {
-    onChange(id);
-    setMatches([]);
-  }, []);
+  const handleItemClick = useCallback(
+    (id: string) => {
+      if (onItemClick) {
+        onItemClick(id);
+      }
+
+      onChange(id);
+      setMatches([]);
+    },
+    [onItemClick],
+  );
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent<HTMLInputElement>) => {

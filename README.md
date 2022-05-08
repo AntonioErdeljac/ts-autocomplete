@@ -46,12 +46,18 @@ Running commands with npm `npm run [command]`
 
 Available props for the component
 
-| prop             | description                                                                                                                             |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `value`          | Controlled value                                                                                                                        |
-| `onChange`       | Function to call on input change                                                                                                        |
-| `dataFilter`     | Async function to filter data, default a TS function using RegEx to match value with initial data Can be used to pass custom API calls. |
-| `valueExtractor` | Function to recognize "value / id" from given options data, Default (option) => option.value                                            |
-| `labelExtractor` | Function to recognize "label" from given options data, Default (option) => option.label                                                 |
-| `options`        | Data to render / filter                                                                                                                 |
-| `placeholder`    | Input placeholder                                                                                                                       |
+| prop               | description                                                                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `value`            | Controlled value                                                                                                                        |
+| `onChange`         | Function to call on input change                                                                                                        |
+| `dataFilter`       | Async function to filter data, default a TS function using RegEx to match value with initial data Can be used to pass custom API calls. |
+| `valueExtractor`   | Function to recognize "value / id" from given options data, Default (option) => option.value                                            |
+| `labelExtractor`   | Function to recognize "label" from given options data, Default (option) => option.label                                                 |
+| `options`          | Data to render / filter                                                                                                                 |
+| `placeholder`      | Input placeholder                                                                                                                       |
+| `onFocus`          | Function to call on input focus                                                                                                         |
+| `onBlur`           | Function to call on input blur                                                                                                          |
+| `onItemClick`      | Function to call on results item click                                                                                                  |
+| `loading`          | Control whether component is loading                                                                                                    |
+| `disabled`         | Control whether component is disabled                                                                                                   |
+| `maxResultsHeight` | Control the height of results wrapper                                                                                                   |

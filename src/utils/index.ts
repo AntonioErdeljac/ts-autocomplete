@@ -4,6 +4,9 @@ export const getLabel = (option: Record<string, any>) => option.label;
 
 export const getValue = (option: Record<string, any>) => option.value;
 
+/**
+ * This can be a Server function returning matching objects
+ */
 export const getFilteredData = async ({
   value,
   options,

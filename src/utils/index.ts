@@ -26,3 +26,16 @@ export const getFilteredData = async ({ value, options, valueExtractor }: DataFi
     return [];
   }
 };
+
+export const classNames = (classes: Record<string, boolean>) => {
+  const result: string[] = [];
+  const keys = Object.keys(classes);
+
+  keys.forEach((key) => {
+    if (classes[key]) {
+      result.push(key);
+    }
+  });
+
+  return result.join(' ');
+};

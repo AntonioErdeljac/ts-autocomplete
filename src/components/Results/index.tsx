@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import './index.css';
 
 import Result from '../Result';
+import { classNames } from '../../utils';
 
 type Props = {
   options: Record<string, any>[],
@@ -20,7 +21,7 @@ const Results: React.FC<Props> = ({
   labelExtractor,
   selectIndex,
 }) => (
-  <div className={`input__results__wrapper ${options.length === 0 ? 'input__results__wrapper--disabled' : ''}`}>
+  <div className={classNames({ input__results__wrapper: true, 'input__results__wrapper--disabled': options.length === 0 })}>
     {options.map((item, index) => (
       <Result
         selected={index === selectIndex}

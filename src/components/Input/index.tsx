@@ -1,6 +1,7 @@
 import React, {
   memo, useCallback, ChangeEvent, KeyboardEventHandler, KeyboardEvent,
 } from 'react';
+import { classNames } from '../../utils';
 import './index.css';
 
 type Props = {
@@ -33,7 +34,7 @@ const Input: React.FC<Props> = ({
       onKeyDown={handleKeyDown}
       disabled={disabled}
       value={value}
-      className={`input__search ${disabled ? 'input__search--disabled' : ''} ${loading ? 'input__search--loading' : ''}`}
+      className={classNames({ input__search: true, 'input__search--disabled': disabled, 'input__search--loading': loading })}
       onChange={handleChange}
       placeholder="Autocomplete"
     />

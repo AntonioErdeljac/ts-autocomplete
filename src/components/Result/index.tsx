@@ -1,4 +1,5 @@
 import React, { memo, useCallback, Children } from 'react';
+import { classNames } from '../../utils';
 import './index.css';
 
 type Props = {
@@ -23,7 +24,7 @@ const Result: React.FC<Props> = ({
   }, [value, onClick]);
 
   return (
-    <div onClick={handleResultClick} className={`input__results__element ${selected ? 'input__results__element--selected' : ''}`}>
+    <div onClick={handleResultClick} className={classNames({ input__results__element: true, 'input__results__element--selected': selected })}>
       {generateText()}
     </div>
   );

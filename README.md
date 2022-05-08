@@ -71,7 +71,7 @@ Available props for the component
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `value`            | Controlled value                                                                                                                        |
 | `onChange`         | Function to call on input change                                                                                                        |
-| `getData`       | Async function to filter data, default a TS function using RegEx to match value with initial data Can be used to pass custom API calls. |
+| `getData`          | Async function to filter data, default a TS function using RegEx to match value with initial data Can be used to pass custom API calls. |
 | `valueExtractor`   | Function to recognize "value / id" from given options data, Default (option) => option.value                                            |
 | `labelExtractor`   | Function to recognize "label" from given options data, Default (option) => option.label                                                 |
 | `options`          | Data to render / filter                                                                                                                 |

@@ -18,7 +18,8 @@ const MOCK_API_URL = '';
  * @returns Record<string, any>[]
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getRemoteData = (value: string): Promise<Record<string, any>[]> => fetch(MOCK_API_URL).then((response) => response.json().then((data) => data));
+const getRemoteData = (value: string): Promise<Record<string, any>[]> =>
+  fetch(MOCK_API_URL).then((response) => response.json().then((data) => data));
 
 const App = () => {
   const [value, setValue] = useState('');

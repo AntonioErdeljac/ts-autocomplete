@@ -4,8 +4,9 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:react/recommended',
     'airbnb',
+    'plugin:react/recommended',
+    'prettier',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -18,8 +19,10 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
+    'prettier',
   ],
   rules: {
+    'prettier/prettier': 2,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/extensions': 0,
     'react/function-component-definition': 0,

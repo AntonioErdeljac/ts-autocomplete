@@ -1,16 +1,18 @@
 import React, { memo } from 'react';
+
 import './index.css';
 
 import Result from '../Result';
+
 import { classNames } from '../../utils';
 
 type Props = {
-  options: Record<string, any>[],
-  value: string,
-  onItemClick: (id: string) => void,
-  labelExtractor: (option: Record<string, any>) => string,
-  valueExtractor: (option: Record<string, any>) => string,
-  selectIndex: number,
+  options: Record<string, any>[];
+  value: string;
+  onItemClick: (id: string) => void;
+  labelExtractor: (option: Record<string, any>) => string;
+  valueExtractor: (option: Record<string, any>) => string;
+  selectIndex: number;
 };
 
 const Results: React.FC<Props> = ({
@@ -21,7 +23,12 @@ const Results: React.FC<Props> = ({
   labelExtractor,
   selectIndex,
 }) => (
-  <div className={classNames({ input__results__wrapper: true, 'input__results__wrapper--disabled': options.length === 0 })}>
+  <div
+    className={classNames({
+      input__results__wrapper: true,
+      'input__results__wrapper--disabled': options.length === 0,
+    })}
+  >
     {options.map((item, index) => (
       <Result
         selected={index === selectIndex}

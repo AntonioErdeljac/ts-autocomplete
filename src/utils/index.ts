@@ -4,7 +4,11 @@ export const getLabel = (option: Record<string, any>) => option.label;
 
 export const getValue = (option: Record<string, any>) => option.value;
 
-export const getFilteredData = async ({ value, options, valueExtractor }: DataFilterOptions): Promise<Record<string, any>[]> => {
+export const getFilteredData = async ({
+  value,
+  options,
+  valueExtractor,
+}: DataFilterOptions): Promise<Record<string, any>[]> => {
   try {
     const reg = new RegExp(value.toLowerCase());
 

@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-  memo,
-  KeyboardEvent,
-} from 'react';
+import React, { useCallback, useState, memo, KeyboardEvent } from 'react';
 
 import { Results, Input } from '../../components';
 import { getFilteredData, getLabel, getValue } from '../../utils';
@@ -15,18 +10,18 @@ import { getFilteredData, getLabel, getValue } from '../../utils';
 enum KEY_MAP {
   ENTER = 13,
   UP = 40,
-  DOWN = 38
+  DOWN = 38,
 }
 
 type Props = {
-  loading: boolean,
-  value: string,
-  onChange: (value: string) => void,
-  options: Record<string, any>[],
-  labelExtractor?: (option: Record<string, any>) => string,
-  valueExtractor?: (option: Record<string, any>) => string,
+  loading: boolean;
+  value: string;
+  onChange: (value: string) => void;
+  options: Record<string, any>[];
+  labelExtractor?: (option: Record<string, any>) => string;
+  valueExtractor?: (option: Record<string, any>) => string;
   disabled?: boolean;
-  dataFilter?: () => Promise<Record<string, any>[]>,
+  dataFilter?: () => Promise<Record<string, any>[]>;
 };
 
 const Autocomplete: React.FC<Props> = ({
@@ -59,20 +54,29 @@ const Autocomplete: React.FC<Props> = ({
     setMatches([]);
   }, []);
 
-  const handleKeyDown = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.keyCode === KEY_MAP.DOWN && selectIndex > 0) {
-      setSelectIndex((currentSelectIndex) => currentSelectIndex - 1);
-    } else if (event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1) {
-      setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
-    } else if (event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0) {
-      handleItemClick(labelExtractor(matches[selectIndex]));
-      setSelectIndex(0);
-    }
-  }, [selectIndex, matches]);
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.keyCode === KEY_MAP.DOWN && selectIndex > 0) {
+        setSelectIndex((currentSelectIndex) => currentSelectIndex - 1);
+      } else if (event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1) {
+        setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
+      } else if (event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0) {
+        handleItemClick(labelExtractor(matches[selectIndex]));
+        setSelectIndex(0);
+      }
+    },
+    [selectIndex, matches],
+  );
 
   return (
     <div className="input">
-      <Input onKeyDown={handleKeyDown} loading={loading} disabled={disabled} value={value} onChange={handleChange} />
+      <Input
+        onKeyDown={handleKeyDown}
+        loading={loading}
+        disabled={disabled}
+        value={value}
+        onChange={handleChange}
+      />
       <Results
         selectIndex={selectIndex}
         labelExtractor={labelExtractor}

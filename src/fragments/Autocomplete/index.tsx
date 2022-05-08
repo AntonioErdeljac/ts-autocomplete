@@ -1,5 +1,7 @@
 import React, { useCallback, useState, memo, KeyboardEvent } from 'react';
 
+import './index.css';
+
 import { Results, Input } from '../../components';
 import { getFilteredData, getLabel, getValue } from '../../utils';
 
@@ -22,6 +24,7 @@ type Props = {
   valueExtractor?: (option: Record<string, any>) => string;
   disabled?: boolean;
   dataFilter?: () => Promise<Record<string, any>[]>;
+  placeholder?: string;
 };
 
 const Autocomplete: React.FC<Props> = ({
@@ -33,6 +36,7 @@ const Autocomplete: React.FC<Props> = ({
   valueExtractor = getValue,
   disabled = false,
   dataFilter = getFilteredData,
+  placeholder,
 }) => {
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
   const [selectIndex, setSelectIndex] = useState(0);
@@ -40,11 +44,19 @@ const Autocomplete: React.FC<Props> = ({
   const handleChange = useCallback(async (newValue: string) => {
     onChange(newValue);
 
+    if (newValue === '') {
+      setSelectIndex(0);
+    }
+
     const newMatches = await dataFilter({
       value: newValue,
       options,
       labelExtractor,
     });
+
+    if (selectIndex > newMatches.length - 1) {
+      setSelectIndex(newMatches.length - 1);
+    }
 
     setMatches(newMatches);
   }, []);
@@ -81,6 +93,7 @@ const Autocomplete: React.FC<Props> = ({
         disabled={disabled}
         value={value}
         onChange={handleChange}
+        placeholder={placeholder}
       />
       <Results
         selectIndex={selectIndex}

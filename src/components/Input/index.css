@@ -1,6 +1,5 @@
 .input {
   display: flex;
-  padding: 10px;
   width: 300px;
   flex-direction: column;
 }

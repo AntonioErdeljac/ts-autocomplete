@@ -13,9 +13,10 @@ type Props = {
   disabled: boolean;
   loading: boolean;
   onKeyDown: KeyboardEventHandler<HTMLInputElement>;
+  placeholder?: string;
 };
 
-const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading }) => {
+const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading, placeholder }) => {
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
@@ -48,7 +49,7 @@ const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading 
           'input__search--loading': loading,
         })}
         onChange={handleChange}
-        placeholder="Autocomplete"
+        placeholder={placeholder}
       />
       {loading ? (
         <div className="input__search__action">

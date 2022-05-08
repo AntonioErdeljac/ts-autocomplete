@@ -36,18 +36,18 @@
 
 8. How many arguments does setState take and why is it async.
 
-   > `setState` is a destructured value from `useState` hook, just like `this.setState`, it accepts a new value, and a callback method, used like `setState('value', (newValue) => { ... })`. The callback method is not often used, but it is a must when wanting to react (other than `useEffect`) on a given `setState` change, since `setState` and `this.setState` are asynchronous for performance reasons.
-   > Meaning that this wont work:
+   > `this.setState` accepts a new value, and a callback method, used like `this.setState({ value: 'value' }, (newValue) => { ... })`. The callback method is used when wanting to react on a given `setState` change, since `this.setState` is asynchronous for performance reasons.
+   > Meaning that this won't work:
 
    ```
-   setState('newChange');
-   console.log(state) // Not guaranteed to be 'newChange'
+   this.setState({ value: 'newChange' });
+   console.log(this.state.value) // Not guaranteed to be 'newChange'
    ```
 
    But this will:
 
    ```
-   setState('newChange', (newState) => console.log(newState));
+   this.setState({ value: 'newChange' }, (newState) => console.log(newState));
    ```
 
 9. List the steps needed to migrate a Class to Function Component.

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, memo, KeyboardEvent, useEffect } from 'react';
+import React, { useCallback, useState, memo, KeyboardEvent, useEffect, FocusEvent } from 'react';
 
 import './index.css';
 
@@ -15,6 +15,8 @@ enum KEY_MAP {
   DOWN = 38,
 }
 
+const MAX_RESULTS_HEIGHT = 300;
+
 type Props = {
   loading?: boolean;
   value: string;
@@ -25,6 +27,9 @@ type Props = {
   disabled?: boolean;
   getData?: (value: string) => Promise<Record<string, any>[]>;
   placeholder?: string;
+  maxResultsHeight?: number;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
 };
 
 const Autocomplete: React.FC<Props> = ({
@@ -37,6 +42,9 @@ const Autocomplete: React.FC<Props> = ({
   disabled = false,
   getData = getFilteredData,
   placeholder,
+  maxResultsHeight = MAX_RESULTS_HEIGHT,
+  onFocus,
+  onBlur,
 }) => {
   const [_loading, setLoading] = useState(!!loading);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
@@ -76,24 +84,45 @@ const Autocomplete: React.FC<Props> = ({
     (event: KeyboardEvent<HTMLInputElement>) => {
       const shouldGoDown = event.keyCode === KEY_MAP.DOWN && selectIndex > 0;
       const shouldGoUp = event.keyCode === KEY_MAP.UP && selectIndex < matches.length - 1;
-      const shouldSelect =
-        event.keyCode === KEY_MAP.ENTER && matches.length > 0 && selectIndex >= 0;
+      const shouldSelect = event.keyCode === KEY_MAP.ENTER && matches.length > 0;
 
       if (shouldGoDown) {
         setSelectIndex((currentSelectIndex) => currentSelectIndex - 1);
       } else if (shouldGoUp) {
         setSelectIndex((currentSelectIndex) => currentSelectIndex + 1);
       } else if (shouldSelect) {
-        handleItemClick(labelExtractor(matches[selectIndex]));
+        const selectedItem = matches[selectIndex];
+
+        handleItemClick(labelExtractor(selectedItem || matches[0]));
         setSelectIndex(0);
       }
     },
     [selectIndex, matches],
   );
 
+  const handleFocus = useCallback(
+    (event: FocusEvent) => {
+      if (onFocus) {
+        onFocus(event);
+      }
+    },
+    [onFocus],
+  );
+
+  const handleBlur = useCallback(
+    (event: FocusEvent) => {
+      if (onBlur) {
+        onBlur(event);
+      }
+    },
+    [onBlur],
+  );
+
   return (
     <div className="input">
       <Input
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         loading={_loading}
         disabled={disabled}
@@ -102,6 +131,7 @@ const Autocomplete: React.FC<Props> = ({
         placeholder={placeholder}
       />
       <Results
+        maxHeight={maxResultsHeight}
         selectIndex={selectIndex}
         labelExtractor={labelExtractor}
         valueExtractor={valueExtractor}

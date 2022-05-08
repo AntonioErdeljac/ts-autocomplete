@@ -1,4 +1,11 @@
-import React, { memo, useCallback, ChangeEvent, KeyboardEventHandler, KeyboardEvent } from 'react';
+import React, {
+  memo,
+  useCallback,
+  ChangeEvent,
+  KeyboardEventHandler,
+  KeyboardEvent,
+  FocusEvent,
+} from 'react';
 
 import './index.css';
 
@@ -14,9 +21,20 @@ type Props = {
   loading: boolean;
   onKeyDown: KeyboardEventHandler<HTMLInputElement>;
   placeholder?: string;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
 };
 
-const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading, placeholder }) => {
+const Input: React.FC<Props> = ({
+  onChange,
+  onKeyDown,
+  onFocus,
+  onBlur,
+  value,
+  disabled,
+  loading,
+  placeholder,
+}) => {
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
@@ -40,6 +58,8 @@ const Input: React.FC<Props> = ({ onChange, onKeyDown, value, disabled, loading,
   return (
     <div className="input__search__wrapper">
       <input
+        onFocus={onFocus}
+        onBlur={onBlur}
         onKeyDown={handleKeyDown}
         disabled={disabled}
         value={value}

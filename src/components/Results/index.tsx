@@ -13,6 +13,7 @@ type Props = {
   labelExtractor: (option: Record<string, any>) => string;
   valueExtractor: (option: Record<string, any>) => string;
   selectIndex: number;
+  maxHeight: number;
 };
 
 const Results: React.FC<Props> = ({
@@ -22,8 +23,10 @@ const Results: React.FC<Props> = ({
   valueExtractor,
   labelExtractor,
   selectIndex,
+  maxHeight,
 }) => (
   <div
+    style={{ maxHeight }}
     className={classNames({
       input__results__wrapper: true,
       'input__results__wrapper--disabled': options.length === 0,

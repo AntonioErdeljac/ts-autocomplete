@@ -38,7 +38,7 @@ const App = () => {
       valueExtractor={getValue}
       labelExtractor={getLabel}
       options={mockData}
-      placeholder="Search Countries"
+      placeholder="Start typing to search movies..."
     />
   );
 };

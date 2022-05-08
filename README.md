@@ -14,7 +14,10 @@ Features:
 - BEM type of CSS classes
 - Components & Fragments folder structure
 - ESlint enforced style
+- Prettier enforced style
 - Strictly Typed
+- Unit tests with React Testing Library
+- Husky pre-push & pre-commit hooks
 
 ### CI / CD
 
@@ -43,13 +46,16 @@ npm i
 
 Running commands with npm `npm run [command]`
 
-| command   | description                                                    |
-| :-------- | :------------------------------------------------------------- |
-| `start`   | Starts a development instance of app on http://localhost:3000/ |
-| `build`   | Creates a production bundle                                    |
-| `preview` | Starts Vite preview server                                     |
+| command         | description                                                    |
+| :-------------- | :------------------------------------------------------------- |
+| `start`         | Starts a development instance of app on http://localhost:3000/ |
+| `build`         | Creates a production bundle                                    |
+| `preview`       | Starts Vite preview server                                     |
+| `test`          | Runs tests                                                     |
+| `test:watch`    | Runs tests in watch / update mode                              |
+| `test:coverage` | Runs tests in coverage mode                                    |
 
-## Autocomplete props
+## Available props
 
 Available props for the component
 

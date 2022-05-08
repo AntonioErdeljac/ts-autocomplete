@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "prepare": "husky install",
     "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "react": "18.0.0",

@@ -18,7 +18,7 @@ const App = () => {
       valueExtractor={getValue}
       labelExtractor={getLabel}
       options={mockData}
-      placeholder="Start typing to search movies..."
+      placeholder="Search some movies..."
     />
   );
 };

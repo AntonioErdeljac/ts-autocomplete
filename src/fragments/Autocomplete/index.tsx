@@ -46,7 +46,7 @@ const Autocomplete: React.FC<Props> = ({
   onItemClick,
 }) => {
   const [_loading, setLoading] = useState(!!loading);
-  const [matches, setMatches] = useState<Record<string, any>[]>([]);
+  const [matches, setMatches] = useState<Record<string, any>[]>(options);
   const [selectIndex, setSelectIndex] = useState(0);
   const [showResults, setShowResults] = useState(false);
 
@@ -74,6 +74,11 @@ const Autocomplete: React.FC<Props> = ({
     async (newValue: string) => {
       onChange(newValue);
       setSelectIndex(0);
+
+      if (newValue === '') {
+        setMatches(options);
+        return;
+      }
 
       setLoading(true);
       const newMatches = await getData(newValue, options, labelExtractor);

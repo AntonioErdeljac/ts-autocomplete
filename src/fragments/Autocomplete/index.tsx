@@ -66,6 +66,7 @@ const Autocomplete: React.FC<Props> = ({
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
       setShowResults(false);
+      setSelectIndex(0);
     }
   }, []);
 
@@ -83,22 +84,15 @@ const Autocomplete: React.FC<Props> = ({
   const handleChange = useCallback(
     async (newValue: string) => {
       onChange(newValue);
-
-      if (newValue === '') {
-        setSelectIndex(0);
-      }
+      setSelectIndex(0);
 
       setLoading(true);
       const newMatches = await getData(newValue, options, labelExtractor);
       setLoading(false);
 
-      if (selectIndex > newMatches.length - 1) {
-        setSelectIndex(newMatches.length - 1);
-      }
-
       setMatches(newMatches);
     },
-    [options, labelExtractor, getData, onChange, selectIndex],
+    [options, labelExtractor, getData, onChange],
   );
 
   const handleItemClick = useCallback(

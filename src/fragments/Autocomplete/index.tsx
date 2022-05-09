@@ -1,4 +1,12 @@
-import React, { useCallback, useState, memo, KeyboardEvent, useEffect, FocusEvent } from 'react';
+import React, {
+  useCallback,
+  useState,
+  memo,
+  KeyboardEvent,
+  useEffect,
+  FocusEvent,
+  useRef,
+} from 'react';
 
 import './index.css';
 
@@ -51,6 +59,22 @@ const Autocomplete: React.FC<Props> = ({
   const [_loading, setLoading] = useState(!!loading);
   const [matches, setMatches] = useState<Record<string, any>[]>([]);
   const [selectIndex, setSelectIndex] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      setShowResults(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [handleClickOutside]);
 
   useEffect(() => {
     setLoading(!!loading);
@@ -114,6 +138,8 @@ const Autocomplete: React.FC<Props> = ({
       if (onFocus) {
         onFocus(event);
       }
+
+      setShowResults(true);
     },
     [onFocus],
   );
@@ -128,7 +154,7 @@ const Autocomplete: React.FC<Props> = ({
   );
 
   return (
-    <div className="input">
+    <div ref={containerRef} className="input">
       <Input
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -140,6 +166,7 @@ const Autocomplete: React.FC<Props> = ({
         placeholder={placeholder}
       />
       <Results
+        visible={showResults}
         maxHeight={maxResultsHeight}
         selectIndex={selectIndex}
         labelExtractor={labelExtractor}

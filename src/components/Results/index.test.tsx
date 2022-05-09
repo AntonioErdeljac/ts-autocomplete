@@ -7,6 +7,7 @@ describe('Results', () => {
   it('Renders correct number of items', () => {
     const { container } = render(
       <Results
+        visible
         onItemClick={() => {}}
         labelExtractor={(option) => option.label}
         valueExtractor={(option) => option.value}

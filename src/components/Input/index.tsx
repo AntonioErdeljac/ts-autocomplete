@@ -9,9 +9,7 @@ import React, {
 
 import './index.css';
 
-import CloseIcon from '../CloseIcon';
-import LoadingIcon from '../LoadingIcon';
-
+import { CloseIcon, LoadingIcon } from '../../assets';
 import { classNames } from '../../utils';
 
 type Props = {
